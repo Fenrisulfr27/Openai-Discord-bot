@@ -14,10 +14,15 @@ export class MessageMentionListener extends Listener {
     if (message.author.bot) return;
     const mentionedBot = message.mentions.has(bot!);
     const isReply = !!message.reference?.messageId;
-
+    if (!mentionedBot) return;
     if (message.channel.isTextBased()) {
       await (message.channel as any).sendTyping();
     }
+    const typingLoop = setInterval(() => {
+      if (message.channel.isTextBased()) {
+        (message.channel as any).sendTyping();
+      }
+    }, 8000);
 
     let userInput = message.content.replace(`<@${bot!.id}>`, "").trim();
 
@@ -41,5 +46,6 @@ export class MessageMentionListener extends Listener {
     });
 
     await message.reply(response.output_text || "Viga AI vastuses.");
+    clearInterval(typingLoop);
   }
 }
