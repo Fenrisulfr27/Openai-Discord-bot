@@ -81,5 +81,3 @@ Swap out the model used in the API request:
 ## Author
 
 [Egert Tõnström](https://www.linkedin.com/in/egert-t%C3%B5nstr%C3%B6m-1004a2389/)
-
----
